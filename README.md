@@ -49,7 +49,9 @@ This driver is co-maintained by Pachyderm and the community. If you're looking t
 
 ## Testing
 
-To run the test suite, you can simply run `tox`.
+To run the test suite, start by deploying Pachyderm and then running `pachctl port-forward`. This is how the python-pachyderm tests will connect to the Pachyderm cluster.
+
+Once you're set up, you can run all tests by simply running `tox`.
 
 To iterate on tests, we recommend running:
 ```
