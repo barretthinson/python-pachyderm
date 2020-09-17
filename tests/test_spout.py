@@ -11,8 +11,7 @@ from os.path import join
 
 
 def test_spout_manager():
-    #with tempfile.TemporaryDirectory(suffix="pachyderm") as d:
-        d = "./testdir"
+    with tempfile.TemporaryDirectory(suffix="pachyderm") as d:
         manager = python_pachyderm.SpoutManager(pfs_directory=d, marker_filename="marker")
 
         with manager.commit() as commit:
