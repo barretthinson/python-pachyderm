@@ -32,7 +32,7 @@ def test_spout_manager():
 
         # Validate output (note that because the most recent writes simply
         # appended to the existing tar file, we must set ignore_zeros to ignore
-        # the extra padding before the second set of the tar headers)
+        # the extra padding before the second set of tar headers)
         with tarfile.open(join(d, "out"), "r:", ignore_zeros=True) as t:
             with t.extractfile("foo2.txt") as x:
                 assert x.read() == b"bar2"
