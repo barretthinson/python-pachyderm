@@ -150,7 +150,8 @@ class Client(
     def new_from_config(cls, config_file=None):
         """
         Creates a Pachyderm client from a config file, which can either be
-        passed in as a file-like object, or if unset, defaults to loading from
+        passed in as a file-like object, or if unset, checks the PACH_CONFIG env
+        var for a path. If that's also unset, it defaults to loading from
         '~/.pachyderm/config.json'.
 
         Params:
@@ -160,11 +161,16 @@ class Client(
         location ('~/.pachyderm/config.json'.)
         """
 
-        if config_file is None:
+        print("PACH_CONFIG is set? {}".format("PACH_CONFIG" in os.environ))
+        if config_file is not None:
+            j = json.load(config_file)
+        elif "PACH_CONFIG" in os.environ:
+            with open(os.environ.get("PACH_CONFIG"), "r") as config_file:
+                j = json.load(config_file)
+                print("config: {}".format(str(j)))
+        else:
             with open(str(Path.home() / ".pachyderm/config.json"), "r") as config_file:
                 j = json.load(config_file)
-        else:
-            j = json.load(config_file)
 
         try:
             active_context = j["v2"]["active_context"]
