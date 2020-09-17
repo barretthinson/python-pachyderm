@@ -46,3 +46,15 @@ However, if for whatever reason you need to know which version of pachyderm core
 ## Contributing
 
 This driver is co-maintained by Pachyderm and the community. If you're looking to contribute to the project, this is a fantastic place to get involved. Take a look at [the contributing guide](./contributing.md) for more info.
+
+## Testing
+
+To run the test suite, you can simply run `tox`.
+
+To iterate on tests, we recommend running:
+```
+mkdir testdir
+tox --devenv testdir -e py38 # one possible environment
+source ./testdir/bin/activate # activate python environment
+python3 -m pytest tests
+```
